@@ -37,9 +37,9 @@ require (
 	github.com/urfave/cli v1.22.2
 	github.com/zclconf/go-cty v1.2.0
 	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9
-	golang.org/x/net v0.0.0-20200707034311-ab3426394381
+	golang.org/x/net v0.0.0-20201021035429-f5854403a974
 	golang.org/x/oauth2 v0.0.0-20200107190931-bf48bf16ab8d
-	golang.org/x/tools v0.0.0-20200113040837-eac381796e91 // indirect
+	golang.org/x/tools v0.0.0-20201110201400-7099162a900a // indirect
 	google.golang.org/api v0.15.0
 	google.golang.org/genproto v0.0.0-20200526211855-cb27e3aa2013
 	k8s.io/api v0.19.3

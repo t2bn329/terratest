@@ -14,6 +14,7 @@ import (
 
 	"github.com/gruntwork-io/terratest/modules/files"
 	"github.com/gruntwork-io/terratest/modules/logger"
+	"github.com/gruntwork-io/terratest/modules/retry"
 	"github.com/gruntwork-io/terratest/modules/testing"
 	"github.com/hashicorp/go-multierror"
 	"golang.org/x/crypto/ssh"
@@ -196,6 +197,33 @@ func CheckSshConnection(t testing.TestingT, host Host) {
 // CheckSshConnectionE checks that you can connect via SSH to the given host and return an error if the connection fails.
 func CheckSshConnectionE(t testing.TestingT, host Host) error {
 	_, err := CheckSshCommandE(t, host, "'exit'")
+	return err
+}
+
+// CheckSshConnectionWithRetry attempts to connect via SSH until max retries has been exceeded and fails the test
+// if the connection fails
+func CheckSshConnectionWithRetry(t testing.TestingT, host Host, retries int, sleepBetweenRetries time.Duration, f ...func(testing.TestingT, Host) error) {
+	handler := CheckSshConnectionE
+	if f != nil {
+		handler = f[0]
+	}
+	err := CheckSshConnectionWithRetryE(t, host, retries, sleepBetweenRetries, handler)
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
+// CheckSshConnectionWithRetryE attempts to connect via SSH until max retries has been exceeded and returns an error if
+// the connection fails
+func CheckSshConnectionWithRetryE(t testing.TestingT, host Host, retries int, sleepBetweenRetries time.Duration, f ...func(testing.TestingT, Host) error) error {
+	handler := CheckSshConnectionE
+	if f != nil {
+		handler = f[0]
+	}
+	_, err := retry.DoWithRetryE(t, fmt.Sprintf("Checking SSH connection to %s", host.Hostname), retries, sleepBetweenRetries, func() (string, error) {
+		return "", handler(t, host)
+	})
+
 	return err
 }
 
