@@ -9,6 +9,9 @@ import (
 )
 
 const (
+	// NOTE: We pull down the json files from github during test runtime as opposed to checking it in as these source
+	// files are licensed under MPL and we want to avoid a dual license scenario where some source files in terratest
+	// are licensed under a different license.
 	basicJsonUrl      = "https://raw.githubusercontent.com/hashicorp/terraform-json/v0.8.0/testdata/basic/plan.json"
 	deepModuleJsonUrl = "https://raw.githubusercontent.com/hashicorp/terraform-json/v0.8.0/testdata/deep_module/plan.json"
 
