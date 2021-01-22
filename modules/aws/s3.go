@@ -262,18 +262,19 @@ func EmptyS3BucketE(t testing.TestingT, region string, name string) error {
 }
 
 // GetS3BucketLoggingTarget fetches the given bucket's logging configuration status and returns it as a string
-func GetS3BucketLoggingTarget(t testing.TestingT, awsRegion string, bucket string) string {
-	loggingTarget, err := GetS3BucketLoggingTargetE(t, awsRegion, bucket)
+func GetS3BucketLoggingTarget(t testing.TestingT, awsRegion string, bucket string) (string, string) {
+	loggingTarget, loggingObjectTargetPrefix, err := GetS3BucketLoggingTargetE(t, awsRegion, bucket)
 	require.NoError(t, err)
 
-	return loggingTarget
+	return loggingTarget, loggingObjectTargetPrefix
 }
 
-// GetS3BucketLoggingE fetches the given bucket's versioning configuration status and returns it as a string
-func GetS3BucketLoggingTargetE(t testing.TestingT, awsRegion string, bucket string) (string, error) {
+// GetS3BucketLoggingE fetches the given bucket's logging configuration status and returns it as the following strings:
+// `TargetBucket` and `TargetPrefix` of the `LoggingEnabled` property for an S3 bucket
+func GetS3BucketLoggingTargetE(t testing.TestingT, awsRegion string, bucket string) (string, string, error) {
 	s3Client, err := NewS3ClientE(t, awsRegion)
 	if err != nil {
-		return "", err
+		return "", "", err
 	}
 
 	res, err := s3Client.GetBucketLogging(&s3.GetBucketLoggingInput{
@@ -281,14 +282,14 @@ func GetS3BucketLoggingTargetE(t testing.TestingT, awsRegion string, bucket stri
 	})
 
 	if err != nil {
-		return "", err
+		return "", "", err
 	}
 
 	if res.LoggingEnabled == nil {
-		return "", S3AccessLoggingNotEnabledErr{bucket, awsRegion}
+		return "", "", S3AccessLoggingNotEnabledErr{bucket, awsRegion}
 	}
 
-	return aws.StringValue(res.LoggingEnabled.TargetBucket), nil
+	return aws.StringValue(res.LoggingEnabled.TargetBucket), aws.StringValue(res.LoggingEnabled.TargetPrefix), nil
 }
 
 // GetS3BucketVersioning fetches the given bucket's versioning configuration status and returns it as a string

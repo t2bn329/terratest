@@ -75,7 +75,7 @@ resource "aws_s3_bucket" "test_bucket" {
 
   logging {
     target_bucket = aws_s3_bucket.test_bucket_logs.id
-    target_prefix = "/"
+    target_prefix = "TFStateLogs/"
   }
 
   tags = {

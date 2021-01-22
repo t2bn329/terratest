@@ -62,7 +62,10 @@ func TestTerraformAwsS3Example(t *testing.T) {
 	aws.AssertS3BucketPolicyExists(t, awsRegion, bucketID)
 
 	// Verify that our bucket has server access logging TargetBucket set to what's expected
-	loggingTargetBucket := aws.GetS3BucketLoggingTarget(t, awsRegion, bucketID)
+	loggingTargetBucket, loggingObjectTargetPrefix := aws.GetS3BucketLoggingTarget(t, awsRegion, bucketID)
 	expectedLogsTargetBucket := fmt.Sprintf("%s-logs", bucketID)
+	expectedLogsTargetPrefix := "TFStateLogs/"
+
 	assert.Equal(t, expectedLogsTargetBucket, loggingTargetBucket)
+	assert.Equal(t, expectedLogsTargetPrefix, loggingObjectTargetPrefix)
 }
