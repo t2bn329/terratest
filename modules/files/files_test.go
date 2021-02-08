@@ -48,6 +48,26 @@ func TestIsExistingDir(t *testing.T) {
 	assert.True(t, IsExistingDir(currentFileDir))
 }
 
+func TestCopyFolderToTemp(t *testing.T) {
+	t.Parallel()
+
+	tempFolderPrefix := "someprefix"
+	tmpDir, err := ioutil.TempDir("", "TestCopyFolderContents")
+	require.NoError(t, err)
+
+	filter := func(path string) bool {
+		return !PathContainsHiddenFileOrFolder(path) && !PathContainsTerraformState(path)
+	}
+
+	folder, err := CopyFolderToTemp("/not/a/real/path", tempFolderPrefix, filter)
+	require.Error(t, err)
+	assert.False(t, FileExists(folder))
+
+	folder, err = CopyFolderToTemp(tmpDir, tempFolderPrefix, filter)
+	assert.DirExists(t, folder)
+	assert.NoError(t, err)
+}
+
 func TestCopyFolderContents(t *testing.T) {
 	t.Parallel()
 

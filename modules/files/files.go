@@ -74,6 +74,14 @@ func CopyTerragruntFolderToTemp(folderPath string, tempFolderPrefix string) (str
 // CopyFolderToTemp creates a copy of the given folder and all its filtered contents in a temp folder
 // with a unique name and the given prefix.
 func CopyFolderToTemp(folderPath string, tempFolderPrefix string, filter func(path string) bool) (string, error) {
+	exists, err := FileExistsE(folderPath)
+	if err != nil {
+		return "", err
+	}
+	if !exists {
+		return "", DirNotFoundError{Directory: folderPath}
+	}
+
 	tmpDir, err := ioutil.TempDir("", tempFolderPrefix)
 	if err != nil {
 		return "", err
