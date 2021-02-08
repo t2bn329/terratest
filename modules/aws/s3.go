@@ -263,15 +263,15 @@ func EmptyS3BucketE(t testing.TestingT, region string, name string) error {
 
 // GetS3BucketLoggingTarget fetches the given bucket's logging target bucket and returns it as a string
 func GetS3BucketLoggingTarget(t testing.TestingT, awsRegion string, bucket string) string {
-	loggingTarget, err := GetS3BucketLoggingTargeE(t, awsRegion, bucket)
+	loggingTarget, err := GetS3BucketLoggingTargetE(t, awsRegion, bucket)
 	require.NoError(t, err)
 
 	return loggingTarget
 }
 
-// GetS3BucketLoggingTargeE fetches the given bucket's logging target bucket and returns it as the following string:
+// GetS3BucketLoggingTargetE fetches the given bucket's logging target bucket and returns it as the following string:
 // `TargetBucket` of the `LoggingEnabled` property for an S3 bucket
-func GetS3BucketLoggingTargeE(t testing.TestingT, awsRegion string, bucket string) (string, error) {
+func GetS3BucketLoggingTargetE(t testing.TestingT, awsRegion string, bucket string) (string, error) {
 	s3Client, err := NewS3ClientE(t, awsRegion)
 	if err != nil {
 		return "", err
