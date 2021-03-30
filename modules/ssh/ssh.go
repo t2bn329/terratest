@@ -261,6 +261,32 @@ func CheckSshCommandE(t testing.TestingT, host Host, command string) (string, er
 	return runSSHCommand(t, sshSession)
 }
 
+// CheckSshCommandWithRetry checks that you can connect via SSH to the given host and run the given command until max retries have been exceeded. Returns the stdout/stderr.
+func CheckSshCommandWithRetry(t testing.TestingT, host Host, command string, retries int, sleepBetweenRetries time.Duration, f ...func(testing.TestingT, Host, string) (string, error)) string {
+	handler := CheckSshCommandE
+	if f != nil {
+		handler = f[0]
+	}
+	out, err := CheckSshCommandWithRetryE(t, host, command, retries, sleepBetweenRetries, handler)
+	if err != nil {
+		t.Fatal(err)
+	}
+	return out
+}
+
+// CheckSshCommandWithRetryE checks that you can connect via SSH to the given host and run the given command until max retries has been exceeded.
+// It return an error if the command fails after max retries has been exceeded.
+
+func CheckSshCommandWithRetryE(t testing.TestingT, host Host, command string, retries int, sleepBetweenRetries time.Duration, f ...func(testing.TestingT, Host, string) (string, error)) (string, error) {
+	handler := CheckSshCommandE
+	if f != nil {
+		handler = f[0]
+	}
+	return retry.DoWithRetryE(t, fmt.Sprintf("Checking SSH connection to %s", host.Hostname), retries, sleepBetweenRetries, func() (string, error) {
+		return handler(t, host, command)
+	})
+}
+
 // CheckPrivateSshConnection attempts to connect to privateHost (which is not addressable from the Internet) via a
 // separate publicHost (which is addressable from the Internet) and then executes "command" on privateHost and returns
 // its output. It is useful for checking that it's possible to SSH from a Bastion Host to a private instance.
