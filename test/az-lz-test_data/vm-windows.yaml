@@ -1,0 +1,56 @@
+rsType: vm-windows
+rsName: vmpatchdit001
+rsDescription: VM with Windows-based OS for project vmpatch
+applicationProjectName: vmpatch
+parameters:
+  vmName: vmpatchdit001
+  ipAddresses:
+  - 172.25.136.48
+  nsgId: "/subscriptions/e44317aa-7352-4122-a436-b77ecf92ff26/resourceGroups/rg-dit-cc-vminfra-001/providers/Microsoft.Network/networkSecurityGroups/nsg-dit-cc-vmpatch-001"
+  locationAbbreviation: cc
+  imagePublisher: MicrosoftWindowsServer
+  imageOffer: WindowsServer
+  imageVersion: latest
+  imageSku: 2019-Datacenter
+  osType: Windows
+  adminUsername: azureclouddit
+  adminPassword:
+    reference:
+      keyVault:
+        id: "/subscriptions/e44317aa-7352-4122-a436-b77ecf92ff26/resourceGroups/rg-dit-cc-vminfra-001/providers/Microsoft.KeyVault/vaults/kv-dit-cc-vmpatch-001"
+      secretName: AdminPassword
+  workspaceId: fcb7af0d-49c2-47b2-8922-82bab2c4e86d
+  workspaceKey:
+    reference:
+      keyVault:
+        id: "/subscriptions/e44317aa-7352-4122-a436-b77ecf92ff26/resourceGroups/rg-dit-cc-vminfra-001/providers/Microsoft.KeyVault/vaults/kv-dit-cc-vmpatch-001"
+      secretName: LawWorkspaceKeydit
+  secondaryWorkspaceId: fcb7af0d-49c2-47b2-8922-82bab2c4e86d
+  secondaryWorkspaceKey:
+    reference:
+      keyVault:
+        id: "/subscriptions/e44317aa-7352-4122-a436-b77ecf92ff26/resourceGroups/rg-dit-cc-vminfra-001/providers/Microsoft.KeyVault/vaults/kv-dit-cc-vmpatch-001"
+      secretName: LawWorkspaceKeydit
+  osDiskType: Standard_LRS
+  #vmSize: Standard_D2_v2
+  vmSize: Standard_B2s
+  vmCount: 1
+  subnetId: "/subscriptions/e44317aa-7352-4122-a436-b77ecf92ff26/resourceGroups/rg-cc-npd-sharedservices-001/providers/Microsoft.Network/virtualNetworks/vnet-npd-cc-testlz-001/subnets/snet-dit-cc-vmpatch-001"
+  environmentName: dit
+  vmLogStorageAccountId: "/subscriptions/e44317aa-7352-4122-a436-b77ecf92ff26/resourceGroups/rg-dit-cc-vminfra-001/providers/Microsoft.Storage/storageAccounts/stditccvmpatch001"
+  vmLogStorageAccountName: stditccvmpatch001
+  vmLogStorageAccountEndpoint: https://core.windows.net/
+  vmBootDiagnosticsStorageUri: https://stditccvmpatch001.blob.core.windows.net
+  recoveryVaultName: rsv-dit-cc-vmpatch-001
+  backupPolicyName: backupPolicy
+  scriptsStorageAccountName: stditccvmpatch001
+  resourceTags:
+    RuntimeEnv: dit
+    App: ccop
+    Project: vmpatch
+    BU: ccoe
+    patchGroupId: CPT-dit-002
+  configureVMScript: https://stditccvmpatch001.blob.core.windows.net/windowsvmscripts/1_ConfigureVM.ps1
+  configureWinRMScript: https://stditccvmpatch001.blob.core.windows.net/windowsvmscripts/2_ConfigureWinRM.ps1
+  configureAddDNSSuffixScript: https://stditccvmpatch001.blob.core.windows.net/windowsvmscripts/3_Add-DNSSuffix.ps1
+  configureMMAMultiHomingScript: https://stditccvmpatch001.blob.core.windows.net/windowsvmscripts/4_ConfigureMMAMultiHoming.ps1

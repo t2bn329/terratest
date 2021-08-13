@@ -1,0 +1,26 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "applicationProjectName": {
+            "value": "vmpatch"
+        },        
+        "containers": {
+            "value": [ "windowsvmscripts" ]
+        },
+        "environmentName": {
+            "value": "dit"
+        },
+        "locationAbbreviation":{
+            "value": "cc"
+        },
+        "tags": {
+            "value": {
+                "RuntimeEnv": "dit",
+                "App": "ccop",
+                "Project": "vmpatch",
+                "BU": "ccoe"
+            }
+        }
+    }
+}

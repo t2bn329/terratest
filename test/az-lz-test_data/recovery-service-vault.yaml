@@ -1,0 +1,22 @@
+rsType: recovery-service-vault
+rsName: rsv-dit-cc-vmpatch-001
+rsDescription: recovery service vault for project vmpatch
+applicationProjectName: vmpatch
+parameters:
+  recoveryVaultName: rsv-dit-cc-vmpatch-001
+  environmentName: dit
+  locationAbbreviation: cc
+  workspaceId: "/subscriptions/53834bf0-e073-426d-82c4-4e641c44b61e/resourcegroups/rg-dit-cc-logging-001/providers/microsoft.operationalinsights/workspaces/log-dit-cc-central-001"
+  diagnosticsLogStorageAccountId: "/subscriptions/e44317aa-7352-4122-a436-b77ecf92ff26/resourceGroups/rg-dit-cc-vminfra-001/providers/Microsoft.Storage/storageAccounts/stditccvmpatch001"
+  vaultStorageType: LocallyRedundant
+  policyName: backupPolicy
+  dailyRetentionDurationCount: 7
+  daysOfTheWeek:
+  - Sunday
+  weeklyRetentionDurationCount: 4
+  monthlyRetentionDurationCount: 2
+  resourceTags:
+    RuntimeEnv: dit
+    App: ccop
+    Project: vmpatch
+    BU: ccoe

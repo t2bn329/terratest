@@ -1,0 +1,126 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vmName": {
+            "value": "vmpatchdit1"
+        },
+        "ipAddresses": {
+            "value": [
+                "172.25.136.48"
+            ]
+        },
+        "nsgId": {
+            "value": "/subscriptions/e44317aa-7352-4122-a436-b77ecf92ff26/resourceGroups/rg-dit-cc-vminfra-001/providers/Microsoft.Network/networkSecurityGroups/nsg-dit-cc-vmpatch-001"
+        },
+        "locationAbbreviation": {
+            "value": "cc"
+        },
+        "imagePublisher": {
+            "value": "MicrosoftWindowsServer"
+        }, 
+        "imageOffer": {
+            "value": "WindowsServer"
+        },
+        "imageVersion": {
+            "value": "latest"
+        },        
+        "imageSku": {
+            "value": "2019-Datacenter"
+        },
+        "osType": {
+            "value": "Windows"
+        },
+        "adminUsername": {
+            "value": "azureclouddit"
+        },
+        "adminPassword": {
+            "reference": {
+                "keyVault": {
+                    "id": "/subscriptions/e44317aa-7352-4122-a436-b77ecf92ff26/resourceGroups/rg-dit-cc-vminfra-001/providers/Microsoft.KeyVault/vaults/kv-dit-cc-vmpatch-001"
+                },
+                "secretName": "AdminPassword"
+            }
+        },
+        "workspaceId": {
+            "value": "fcb7af0d-49c2-47b2-8922-82bab2c4e86d"
+        },
+        "workspaceKey": {
+            "reference": {
+                "keyVault": {
+                    "id": "/subscriptions/e44317aa-7352-4122-a436-b77ecf92ff26/resourceGroups/rg-dit-cc-vminfra-001/providers/Microsoft.KeyVault/vaults/kv-dit-cc-vmpatch-001"
+                },
+                "secretName": "LawWorkspaceKeydit"
+            }
+        },
+        "secondaryWorkspaceId": {
+            "value": "fcb7af0d-49c2-47b2-8922-82bab2c4e86d"
+        },
+        "secondaryWorkspaceKey": {
+            "reference": {
+                "keyVault": {
+                    "id": "/subscriptions/e44317aa-7352-4122-a436-b77ecf92ff26/resourceGroups/rg-dit-cc-vminfra-001/providers/Microsoft.KeyVault/vaults/kv-dit-cc-vmpatch-001"
+                },
+                "secretName": "LawWorkspaceKeydit"
+            }
+        },
+        "osDiskType": {
+            "value": "Standard_LRS"
+        },
+        "vmSize": {
+            "value": "Standard_D2_v2"
+        },
+        "vmCount": {
+            "value": 1
+        },
+        "subnetId": {
+            "value": "/subscriptions/e44317aa-7352-4122-a436-b77ecf92ff26/resourceGroups/rg-cc-npd-sharedservices-001/providers/Microsoft.Network/virtualNetworks/vnet-npd-cc-testlz-001/subnets/snet-dit-cc-vmpatch-001"
+        },
+        "environmentName": {
+            "value": "dit"
+        },
+        "vmLogStorageAccountId": {
+            "value": "/subscriptions/e44317aa-7352-4122-a436-b77ecf92ff26/resourceGroups/rg-dit-cc-vminfra-001/providers/Microsoft.Storage/storageAccounts/stditccvmpatch001"
+
+        },
+        "vmLogStorageAccountName": {
+            "value": "stditccvmpatch001"
+        },
+        "vmLogStorageAccountEndpoint": {
+            "value": "https://core.windows.net/"
+        },
+        "vmBootDiagnosticsStorageUri": {
+            "value": "https://stditccvmpatch001.blob.core.windows.net"
+        },
+        "recoveryVaultName": {
+            "value": "rsv-dit-cc-vmpatch-001"
+        },
+        "backupPolicyName": {
+            "value": "backupPolicy"
+        },
+        "scriptsStorageAccountName": {
+            "value": "stditccvmpatch001"
+        },
+        "resourceTags": {
+            "value": {
+                "RuntimeEnv": "dit",
+                "App": "ccop",
+                "Project": "vmpatch",
+                "BU": "ccoe",
+                "patchGroupId": "CPT-dit-003"
+            }
+        },
+        "configureVMScript": {
+            "value": "https://stditccvmpatch001.blob.core.windows.net/windowsvmscripts/1_ConfigureVM.ps1"
+        },
+        "configureWinRMScript": {
+            "value": "https://stditccvmpatch001.blob.core.windows.net/windowsvmscripts/2_ConfigureWinRM.ps1"
+        },
+        "configureAddDNSSuffixScript": {
+            "value": "https://stditccvmpatch001.blob.core.windows.net/windowsvmscripts/3_Add-DNSSuffix.ps1"
+        },
+        "configureMMAMultiHomingScript": {
+            "value": "https://stditccvmpatch001.blob.core.windows.net/windowsvmscripts/4_ConfigureMMAMultiHoming.ps1"
+        }
+    }
+}

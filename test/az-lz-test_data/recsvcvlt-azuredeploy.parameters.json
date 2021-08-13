@@ -1,0 +1,49 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "recoveryVaultName": {
+            "value": "vmpatch"
+        },
+        "environmentName": {
+            "value": "dit"
+        },
+        "locationAbbreviation": {
+            "value": "cc"
+        },
+        "workspaceId": {
+            "value": "/subscriptions/53834bf0-e073-426d-82c4-4e641c44b61e/resourcegroups/rg-dit-cc-logging-001/providers/microsoft.operationalinsights/workspaces/log-dit-cc-central-001"
+        },  
+        "diagnosticsLogStorageAccountId": {
+            "value": "/subscriptions/e44317aa-7352-4122-a436-b77ecf92ff26/resourceGroups/rg-dit-cc-vminfra-001/providers/Microsoft.Storage/storageAccounts/stditccvmpatch001"
+        },
+        "vaultStorageType": {
+            "value": "LocallyRedundant"
+        },
+        "policyName": {
+            "value": "backupPolicy"
+        },
+        "dailyRetentionDurationCount": {
+            "value": 7
+        },
+        "daysOfTheWeek": {
+            "value": [
+                "Sunday"
+            ]
+        },
+        "weeklyRetentionDurationCount": {
+            "value": 4
+        },
+        "monthlyRetentionDurationCount": {
+            "value": 2
+        },
+        "resourceTags": {
+            "value": {
+                "RuntimeEnv": "dit",
+                "App": "ccop",
+                "Project": "vmpatch",
+                "BU": "ccoe"
+            }
+        }
+    }
+}

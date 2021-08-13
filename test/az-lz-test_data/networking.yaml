@@ -1,0 +1,17 @@
+rsType: networking
+rsName: vnet-npd-cc-testlz-001
+rsDescription: my networking for vmpatch
+applicationProjectName: vmpatch
+parameters:
+  virtualNetworkResourceGroupName: rg-cc-npd-sharedservices-001
+  virtualNetworkName: vnet-npd-cc-testlz-001
+  subnetName: snet-dit-cc-vmpatch-001
+  subnetAddressPrefix: 172.25.136.32/27
+  nsgName: nsg-dit-cc-vmpatch-001
+  bastionSubnetAddressRange: 172.25.136.0/27
+  resourceTags:
+    RuntimeEnv: dit
+    App: ccop
+    Project: vmpatch
+    BU: ccoe
+  routeTableId: "/subscriptions/e44317aa-7352-4122-a436-b77ecf92ff26/resourceGroups/rg-cc-npd-sharedservices-001/providers/Microsoft.Network/routeTables/route-npd-cc-sharedservices-default-001"

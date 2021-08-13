@@ -1,0 +1,11 @@
+rsType: network-security-group
+rsName: nsg-dit-cc-acdr-querysurge-001
+rsDescription: my network security group for querysurge
+applicationProjectName: querysurge
+parameters:
+  resourceTags:
+    RuntimeEnv: dit
+    App: ccop
+    Project: querysurge
+    BU: ccoe
+  routeTableId: ""

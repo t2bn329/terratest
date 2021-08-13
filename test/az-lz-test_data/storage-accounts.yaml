@@ -1,0 +1,20 @@
+rsType: storage-accounts
+rsName: stditccvmpatch001
+rsDescription: sample storage accounts
+applicationProjectName: vmpatch
+# Optional - If the subscriptionID is not specified, the test will perform a search from the list of
+# subscriptions within the azure login permission
+rsSubscriptionID: ""
+# Optional - If the resourceGroup is not specified, the test will perform a search from the list of
+# resource groups within each of the subscriptions
+rsResourceGroupName: ""
+parameters:
+  containers:
+  - windowsvmscripts
+  environmentName: dit
+  locationAbbreviation: cc  
+  resourceTags:
+    RuntimeEnv: dit
+    App: ccop
+    Project: vmpatch
+    BU: ccoe

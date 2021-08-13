@@ -1,0 +1,91 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "keyVaultName": {
+            "value": "kv-dit-cc-vmpatch-001"
+        },
+        "keyVaultSku": {
+            "value": "Standard"
+        },
+        "azureTenantId": {
+            "value": "75056d76-b628-4488-82b0-80b08b52d854"
+        },
+        "accessPolicies": {
+            "value": [
+                {
+                    "name": "cpggpc-CloudCommunityOfPractice-e44317aa-7352-4122-a436-b77ecf92ff26",
+                    "tenantId": "75056d76-b628-4488-82b0-80b08b52d854",
+                    "objectId": "6f07bd8b-6eb3-4a25-afc9-72818b15f484",
+                    "applicationId": ""
+                },
+                {
+                    "name": "admDinesh.Urs@cpggpc.ca",
+                    "tenantId": "75056d76-b628-4488-82b0-80b08b52d854",
+                    "objectId": "22f9385b-597e-4bef-af3f-829728a274cd",
+                    "applicationId": ""
+                }
+            ]
+        },
+        "accessPoliciesKeys": {
+            "value": [
+                "Get",
+                "List",
+                "Update",
+                "Create",
+                "Import",
+                "Delete",
+                "Recover",
+                "Backup",
+                "Restore"
+            ]
+        },
+        "accessPoliciesSecrets": {
+            "value": [
+                "Get",
+                "List",
+                "Set",
+                "Delete",
+                "Recover",
+                "Backup",
+                "Restore"
+            ]
+        },
+        "accessPoliciesCertificates": {
+            "value": [
+                "Get",
+                "List",
+                "Update",
+                "Create",
+                "Import",
+                "Delete",
+                "Recover",
+                "Backup",
+                "Restore",
+                "ManageContacts",
+                "ManageIssuers",
+                "GetIssuers",
+                "ListIssuers",
+                "SetIssuers",
+                "DeleteIssuers"
+            ]
+        },
+        "accessPoliciesStorage": {
+            "value": []
+        },
+        "secretNameLawKey": {
+            "value": "LawWorkspaceKeydit"
+        },
+        "workspaceUrl": {
+            "value": "/subscriptions/53834bf0-e073-426d-82c4-4e641c44b61e/resourcegroups/rg-dit-cc-logging-001/providers/microsoft.operationalinsights/workspaces/log-dit-cc-central-001"
+        },
+        "resourceTags": {
+            "value": {
+                "RuntimeEnv": "dit",
+                "App": "ccop",
+                "Project": "vmpatch",
+                "BU": "ccoe"
+            }
+        }
+    }
+}
